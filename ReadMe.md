@@ -3,6 +3,8 @@
 PageHelper分页插件;并使用Spring提供的RestTemplate调用RestFul风格的API接口。
 
 
+===》本项目的Swagger在线文档打开地址：http://localhost:8083/swagger-ui.html#/
+
 
 ===》SpringBoot项目整体结构搭建 ：https://www.cnblogs.com/xuwujing/p/8260935.html 
 
@@ -17,3 +19,4 @@ PageHelper分页插件;并使用Spring提供的RestTemplate调用RestFul风格�
 
 
 ===》github地址：https://github.com/leishen6?tab=repositories 
+
