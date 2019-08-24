@@ -28,6 +28,28 @@ public class TestRestAPI {
 		System.out.println(resultJsonObject.getString("date"));
 	}
 	
+	
+	@Test
+	public  void findAllByPage(){
+		RestTemplate restTemplate = new RestTemplate();
+
+		String url = "http://localhost:8083/api/user/findUserAllByPage";
+		
+		//请求参数
+		RequestParameter<User> re = new RequestParameter<>();
+		User user = new User();
+		user.getPageinfo().setPageNum(1);
+		user.getPageinfo().setPageSize(6);
+		re.setData(user);
+		
+		String result = restTemplate.postForObject(url, re, String.class);
+
+		JSONObject resultJsonObject = JSON.parseObject(result);
+		System.out.println(resultJsonObject.getString("date"));
+	}
+	
+	
+	
 	@Test
 	public  void addUser(){
 		RestTemplate restTemplate = new RestTemplate();

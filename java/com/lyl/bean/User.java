@@ -3,6 +3,7 @@ package com.lyl.bean;
 import java.io.Serializable;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @Title: User
@@ -18,6 +19,9 @@ public class User implements Serializable {
 	private String name;
 	/** 年龄 */
 	private int age;
+	
+	/**分页插件所需要使用的*/
+	private PageInfo pageinfo;
 
 	public User() {
 	}
@@ -44,6 +48,14 @@ public class User implements Serializable {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+	
+	public PageInfo getPageinfo() {
+		return pageinfo;
+	}
+
+	public void setPageinfo(PageInfo pageinfo) {
+		this.pageinfo = pageinfo;
 	}
 
 	public String toString() {

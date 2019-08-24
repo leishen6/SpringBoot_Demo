@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lyl.bean.User;
 import com.lyl.service.UserService;
 import com.lyl.utils.RequestParameter;
@@ -105,7 +108,9 @@ public class UserRestController {
 	@GetMapping("/user/findUserAll")
 	public Response<List<User>> findAll() {
 		logger.info("开始查询所有数据...");
+
 		List<User> findAll = userService.findAll();
+		
 		Response response = null;
 		if (findAll.size() != 0) {
 			response = new Response(findAll, ResponseCode.SUCCESS.code(), ResponseCode.SUCCESS.message());
@@ -115,5 +120,28 @@ public class UserRestController {
 		}
 		return response;
 	}
+	
+	
+	
+	
+	@ApiOperation(value="分页查询全部用户", notes="分页查询全部用户数据")
+	@PostMapping("/user/findUserAllByPage")
+	public Response<PageInfo> findAllByPage(@RequestBody RequestParameter<User> requestParameter) {
+		logger.info("开始分页查询数据...");
+		
+		PageHelper.startPage(requestParameter.getData().getPageinfo().getPageNum(), requestParameter.getData().getPageinfo().getPageSize());
+		List<User> findAll = userService.findAll();
+		PageInfo<User> pageinfo = new PageInfo<>(findAll);
+		
+		Response response = null;
+		if (findAll.size() != 0) {
+			response = new Response(pageinfo, ResponseCode.SUCCESS.code(), ResponseCode.SUCCESS.message());
+		}
+		else {
+			response = new Response(pageinfo, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
+		}
+		return response;
+	}
+	
 	
 }
