@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
  * @Description:
  * @date: 2019年8月23日 下午4:21:11
  */
+@SuppressWarnings("rawtypes")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;

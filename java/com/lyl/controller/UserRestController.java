@@ -50,6 +50,7 @@ public class UserRestController {
 		else {
 			response = new Response(flag, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
+		logger.info(response.toString());
 		return response;
 	}
     
@@ -66,6 +67,7 @@ public class UserRestController {
 		else {
 			response = new Response(flag, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
+		logger.info(response.toString());
 		return response;
 	}
 
@@ -82,6 +84,7 @@ public class UserRestController {
 		else {
 			response = new Response(flag, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
+		logger.info(response.toString());
 		return response;
 	}
 	
@@ -99,6 +102,7 @@ public class UserRestController {
 		else {
 			response = new Response("", ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
+		logger.info(response.toString());
 		return response;
 	}
 	
@@ -118,6 +122,7 @@ public class UserRestController {
 		else {
 			response = new Response(findAll, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
+		logger.info(response.toString());
 		return response;
 	}
 	
@@ -140,8 +145,10 @@ public class UserRestController {
 		else {
 			response = new Response(pageinfo, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
+		logger.info(response.toString());
 		return response;
 	}
+	
 	
 	
 }

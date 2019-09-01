@@ -2,6 +2,8 @@ package com.lyl.utils;
 
 import java.io.Serializable;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  *@Title: Response 
  * @Description: 封装的统一的响应返回类
@@ -48,6 +50,12 @@ public class Response<T> implements Serializable{
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+
+	@Override
+	public String toString() {
+		return JSONObject.toJSONString(this);
 	}
 
 }
