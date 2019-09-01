@@ -11,11 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication // 启动类注解，是一个复合注解
 @MapperScan("com.lyl.dao") // 扫描MapperDao的
-public class Application {
+public class StartApplication {
 
 	public static void main(String[] args) {
 		// 启动嵌入式的 Tomcat 并初始化 Spring 环境及其各 Spring 组件
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(StartApplication.class, args);
 		System.out.println("程序启动成功......");
 	}
 	
