@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
  */
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/v1/api")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class UserRestController {
 
