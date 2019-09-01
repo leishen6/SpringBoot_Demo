@@ -1,6 +1,6 @@
 
 此项目是一个基于SpringBoot设计RestFul接口的，并整合了swagger生成在线的接口文件，并且实现统一格式返回及异常情况处理 ,并且集成了
-PageHelper分页插件;并使用Spring提供的RestTemplate调用RestFul风格的API接口; 并且简单配置了下SpringBoot的日志内容。
+PageHelper分页插件;并使用Spring提供的RestTemplate调用RestFul风格的API接口; 并且简单配置了下SpringBoot + mybatis的日志内容。
 
 
 ===》本项目的Swagger在线文档打开地址：http://localhost:8083/swagger-ui.html#/
