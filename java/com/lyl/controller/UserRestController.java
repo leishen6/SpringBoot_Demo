@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyl.bean.User;
 import com.lyl.service.UserService;
+import com.lyl.utils.RedisTemplateUtils;
 import com.lyl.utils.RequestParameter;
 import com.lyl.utils.Response;
 import com.lyl.utils.ResponseCode;
@@ -32,16 +33,27 @@ import io.swagger.annotations.ApiOperation;
 public class UserRestController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	// redis模糊查询key时匹配的键
+	private String prex = "User_";
+	
+	@Autowired
+	RedisTemplateUtils redisU;
 
 	@Autowired
 	private UserService userService;
     
 	
-	//@ApiOperation这个注解是使用swagger生成rest接口的在线文档
+	// @ApiOperation这个注解是使用swagger生成rest接口的在线文档
 	@ApiOperation(value="新增用户", notes="新增用户数据")
 	@PostMapping("/user/addUser")
 	public Response<Boolean> addUser(@RequestBody RequestParameter<User> requestParameter) {
 		logger.info("开始新增...");
+		
+		// 插入新数据，需要将redis中与 User 相关的缓存数据清空
+		logger.info("清空redis中与 "+prex+"相关的缓存数据...");
+		redisU.deleteByPrex(prex+"*");
+		
 		boolean flag = userService.addUser(requestParameter.getData());
 		Response response = null;
 		if (flag) {
@@ -59,6 +71,11 @@ public class UserRestController {
 	@PostMapping("/user/updateUser")
 	public Response<Boolean> updateUser(@RequestBody RequestParameter<User> requestParameter) {
 		logger.info("开始更新...");
+		
+		// 插入新数据，需要将redis中与 User 相关的缓存数据清空
+		logger.info("清空redis中与 "+prex+"相关的缓存数据...");
+		redisU.deleteByPrex(prex+"*");
+		
 		boolean flag = userService.updateUser(requestParameter.getData());
 		Response response = null;
 		if (flag) {
@@ -76,6 +93,11 @@ public class UserRestController {
 	@PostMapping("/user/deleteUserById")
 	public Response<Boolean> delete(@RequestBody RequestParameter<Integer> requestParameter) {
 		logger.info("开始删除... " + requestParameter.getData());
+		
+		// 插入新数据，需要将redis中与 User 相关的缓存数据清空
+		logger.info("清空redis中与 "+prex+"相关的缓存数据...");
+		redisU.deleteByPrex(prex+"*");
+		
 		boolean flag = userService.deleteUser(requestParameter.getData());
 		Response response = null;
 		if (flag) {
@@ -94,7 +116,18 @@ public class UserRestController {
 	@PostMapping("/user/findUserByName")
 	public Response<User> findByUserId(@RequestBody RequestParameter<String> requestParameter) {
 		logger.info("开始根据名字查询数据...");
-		User user = userService.findUserByName(requestParameter.getData());
+		
+		User user;
+		
+		user = redisU.get("User_"+requestParameter.getData(), User.class);
+		
+		if (user == null) {
+			user = userService.findUserByName(requestParameter.getData());
+			
+			logger.info("将数据放到redis缓存中......");
+			redisU.set("User_"+requestParameter.getData(), user);
+		}
+		
 		Response response = null;
 		if (user != null) {
 			response = new Response(user, ResponseCode.SUCCESS.code(), ResponseCode.SUCCESS.message());
@@ -112,8 +145,17 @@ public class UserRestController {
 	@GetMapping("/user/findUserAll")
 	public Response<List<User>> findAll() {
 		logger.info("开始查询所有数据...");
-
-		List<User> findAll = userService.findAll();
+		
+		List<User> findAll;
+		//redis缓存中查询
+		findAll = redisU.get("User_findUserAll", List.class);
+		
+		if (!(findAll != null && findAll.size()>0)) {
+			findAll = userService.findAll();
+			
+			logger.info("将数据放到redis缓存中......");
+			redisU.set("User_findUserAll", findAll);
+		}
 		
 		Response response = null;
 		if (findAll.size() != 0) {

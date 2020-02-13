@@ -21,7 +21,7 @@ public class TestRestAPI {
 
 		String url = "http://localhost:8083/api/user/findUserAll";
 		
-		//无参数的查询使用 getForObject()
+		// 无参数的查询使用 getForObject()
 		String result = restTemplate.getForObject(url, String.class);
 
 		JSONObject resultJsonObject = JSON.parseObject(result);
@@ -35,7 +35,7 @@ public class TestRestAPI {
 
 		String url = "http://localhost:8083/api/user/findUserAllByPage";
 		
-		//请求参数
+		// 请求参数
 		RequestParameter<User> re = new RequestParameter<>();
 		User user = new User();
 		user.getPageinfo().setPageNum(1);
@@ -56,7 +56,7 @@ public class TestRestAPI {
 
 		String url = "http://localhost:8083/api/user/addUser";
 		
-		//请求参数
+		// 请求参数
 		RequestParameter<User> re = new RequestParameter<>();
 		User user = new User();
 		user.setAge(36);
@@ -74,7 +74,7 @@ public class TestRestAPI {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		String url = "http://localhost:8083/api/user/deleteUserById";
-		//请求参数
+		// 请求参数
 		RequestParameter<Integer> re = new RequestParameter<>();
 		int id = 16;
 		re.setData(id);
@@ -91,7 +91,7 @@ public class TestRestAPI {
 
 		String url = "http://localhost:8083/api/user/updateUser";
 		
-		//请求参数
+		// 请求参数
 		RequestParameter<User> re = new RequestParameter<>();
 		User user = new User();
 		user.setId(23);
@@ -112,7 +112,7 @@ public class TestRestAPI {
 
 		String url = "http://localhost:8083/api/user/findUserByName";
 		
-		//请求参数
+		// 请求参数
 		RequestParameter<String> re = new RequestParameter<>();
 		re.setData("图色");
 		

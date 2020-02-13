@@ -17,7 +17,7 @@ import com.lyl.service.UserService;
  * @date: 2019年8月23日 下午4:29:01
  */
 
-@Service //表示此是服务层类 
+@Service // 表示此是服务层类 
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
 	
 	@Override
-	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)//添加上事务
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)// 添加上事务
 	public boolean addUser(User user) {
 		boolean flag = false;
 		try {
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	
 	@Override
-	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)//添加上事务
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)// 添加上事务
 	public boolean updateUser(User user) {
 		boolean flag = false;
 		try {
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	
 	@Override
-	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)//添加上事务
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)// 添加上事务
 	public boolean deleteUser(int id) {
 		boolean flag = false;
 		try {

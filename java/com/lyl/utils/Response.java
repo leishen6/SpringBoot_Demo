@@ -11,13 +11,13 @@ import com.alibaba.fastjson.JSONObject;
  */
 @SuppressWarnings("serial")
 public class Response<T> implements Serializable{
-	//响应数据
+	// 响应数据
 	private T date;
 	
-	//响应码
+	// 响应码
 	private Integer code;
 	
-	//响应消息
+	// 响应消息
 	private String message;
 
 	public Response(T date, Integer code, String message) {
