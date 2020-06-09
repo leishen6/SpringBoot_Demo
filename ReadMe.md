@@ -36,5 +36,5 @@ PageHelper分页插件;并使用Spring提供的RestTemplate调用RestFul风格�
 ===》GitHub地址：https://github.com/leishen6?tab=repositories 
 
 
-===》个人博客地址：https://leishen6.github.io/
+===》个人网站地址：https://leishen6.github.io/
 
