@@ -1,5 +1,6 @@
 package com.lyl.utils;
 
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -97,9 +98,11 @@ public class RedisTemplateUtils {
         }
         else if(clazz==String.class){
             return (T)value;
+        }else if (clazz == List.class){
+            return JSON.toJavaObject(JSON.parseArray(value),clazz);
         }else {
-            return JSON.toJavaObject(JSON.parseObject(value),clazz);
-        }
+			return JSON.toJavaObject(JSON.parseObject(value),clazz);
+		}
     }
 	
 	

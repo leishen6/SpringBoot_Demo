@@ -55,7 +55,6 @@ public class Response<T> implements Serializable{
 
 	@Override
 	public String toString() {
-		return JSONObject.toJSONString(this);
+		return JSONObject.toJSONString(this) ;
 	}
-
 }

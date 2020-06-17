@@ -1,5 +1,7 @@
 package com.lyl.utils;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -70,5 +72,10 @@ public class RequestParameter<T> {
 	public void setData(T data) {
 		this.data = data;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		return JSONObject.toJSONString(this);
+	}
 }

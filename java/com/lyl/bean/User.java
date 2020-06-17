@@ -24,7 +24,13 @@ public class User implements Serializable {
 	/**分页插件所需要使用的*/
 	private PageInfo pageinfo;
 
-	public User() {
+
+	public User(){
+
+	}
+
+	public User(PageInfo pageinfo) {
+		this.pageinfo = pageinfo;
 	}
 
 	public int getId() {

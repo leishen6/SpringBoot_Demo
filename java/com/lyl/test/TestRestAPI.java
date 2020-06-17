@@ -1,5 +1,6 @@
 package com.lyl.test;
 
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 import com.alibaba.fastjson.JSON;
@@ -19,7 +20,7 @@ public class TestRestAPI {
 	public  void findAll(){
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8083/api/user/findUserAll";
+		String url = "http://localhost:8083/v1/api/user/findUserAll";
 		
 		// 无参数的查询使用 getForObject()
 		String result = restTemplate.getForObject(url, String.class);
@@ -33,11 +34,13 @@ public class TestRestAPI {
 	public  void findAllByPage(){
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8083/api/user/findUserAllByPage";
+		String url = "http://localhost:8083/v1/api/user/findUserAllByPage";
 		
 		// 请求参数
 		RequestParameter<User> re = new RequestParameter<>();
-		User user = new User();
+		// 分页工具类
+		PageInfo pageinfo = new PageInfo();
+		User user = new User(pageinfo);
 		user.getPageinfo().setPageNum(1);
 		user.getPageinfo().setPageSize(6);
 		re.setData(user);
@@ -54,7 +57,7 @@ public class TestRestAPI {
 	public  void addUser(){
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8083/api/user/addUser";
+		String url = "http://localhost:8083/v1/api/user/addUser";
 		
 		// 请求参数
 		RequestParameter<User> re = new RequestParameter<>();
@@ -73,7 +76,7 @@ public class TestRestAPI {
 	public  void deleteUserByid(){
 		RestTemplate restTemplate = new RestTemplate();
 		
-		String url = "http://localhost:8083/api/user/deleteUserById";
+		String url = "http://localhost:8083/v1/api/user/deleteUserById";
 		// 请求参数
 		RequestParameter<Integer> re = new RequestParameter<>();
 		int id = 16;
@@ -89,7 +92,7 @@ public class TestRestAPI {
 	public  void updateUser(){
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8083/api/user/updateUser";
+		String url = "http://localhost:8083/v1/api/user/updateUser";
 		
 		// 请求参数
 		RequestParameter<User> re = new RequestParameter<>();
@@ -110,7 +113,7 @@ public class TestRestAPI {
 	public  void findUserByName(){
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8083/api/user/findUserByName";
+		String url = "http://localhost:8083/v1/api/user/findUserByName";
 		
 		// 请求参数
 		RequestParameter<String> re = new RequestParameter<>();

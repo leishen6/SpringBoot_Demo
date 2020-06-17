@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @Title: Application
- * @Description:
+ * @Description:  springboot 的启动类
  * @date: 2019年8月23日 下午4:38:42
  */
 @SpringBootApplication // 启动类注解，是一个复合注解

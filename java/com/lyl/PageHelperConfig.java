@@ -2,6 +2,8 @@ package com.lyl;
 
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,11 +16,13 @@ import com.github.pagehelper.PageHelper;
  */
 @Configuration
 public class PageHelperConfig {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Bean
     public PageHelper pageHelper() {
-        System.out.println("MyBatisConfiguration.pageHelper()分页插件成功注册到容器中......");
-        
+		logger.info("\n MyBatisConfiguration.pageHelper()分页插件成功注册到容器中......");
+
         PageHelper pageHelper = new PageHelper();
 		Properties properties = new Properties();
 		properties.setProperty("offsetAsPageNum", "true");

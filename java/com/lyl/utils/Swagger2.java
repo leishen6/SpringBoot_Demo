@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @Title: Swagger2
  * @Description:  Swagger2配置类
- *              实现Swagger除了需要在controller中的方法使用@ApiOperation注解外，还需要定义一个Swagger2配置类
+ *   实现Swagger除了需要在controller中的方法使用@ApiOperation注解外，还需要定义一个Swagger2配置类
  * @date: 2019年8月23日 下午5:22:02
  */
 @Configuration
@@ -31,7 +31,7 @@ public class Swagger2 {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("REST接口定义").version("1.0").description("用于测试RESTful API").build();
+		return new ApiInfoBuilder().title("REST接口定义").version("1.0").description("用于测试RESTful API , 接口版本为 v1").build();
 	}
 
 }

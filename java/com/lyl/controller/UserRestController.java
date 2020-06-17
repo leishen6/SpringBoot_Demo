@@ -48,6 +48,7 @@ public class UserRestController {
 	@ApiOperation(value="新增用户", notes="新增用户数据")
 	@PostMapping("/user/addUser")
 	public Response<Boolean> addUser(@RequestBody RequestParameter<User> requestParameter) {
+		logger.info("request: "+ requestParameter.toString());
 		logger.info("开始新增...");
 		
 		// 插入新数据，需要将redis中与 User 相关的缓存数据清空
@@ -62,14 +63,15 @@ public class UserRestController {
 		else {
 			response = new Response(flag, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
-		logger.info(response.toString());
+		logger.info("response: "+response.toString());
 		return response;
 	}
     
 	
-	@ApiOperation(value="更新用户", notes="更新用户数据")
+	@ApiOperation(value="根据id更新用户", notes="更新用户数据")
 	@PostMapping("/user/updateUser")
 	public Response<Boolean> updateUser(@RequestBody RequestParameter<User> requestParameter) {
+		logger.info("request: "+ requestParameter.toString());
 		logger.info("开始更新...");
 		
 		// 插入新数据，需要将redis中与 User 相关的缓存数据清空
@@ -84,7 +86,7 @@ public class UserRestController {
 		else {
 			response = new Response(flag, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
-		logger.info(response.toString());
+		logger.info("response: "+response.toString());
 		return response;
 	}
 
@@ -92,6 +94,7 @@ public class UserRestController {
 	@ApiOperation(value="根据用户id删除用户", notes="根据用户id删除用户数据")
 	@PostMapping("/user/deleteUserById")
 	public Response<Boolean> delete(@RequestBody RequestParameter<Integer> requestParameter) {
+		logger.info("request: "+ requestParameter.toString());
 		logger.info("开始删除... " + requestParameter.getData());
 		
 		// 插入新数据，需要将redis中与 User 相关的缓存数据清空
@@ -106,7 +109,7 @@ public class UserRestController {
 		else {
 			response = new Response(flag, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
-		logger.info(response.toString());
+		logger.info("response: "+response.toString());
 		return response;
 	}
 	
@@ -115,6 +118,7 @@ public class UserRestController {
 	@ApiOperation(value="根据名字查询用户", notes="根据名字查询用户数据")
 	@PostMapping("/user/findUserByName")
 	public Response<User> findByUserId(@RequestBody RequestParameter<String> requestParameter) {
+		logger.info("request: "+ requestParameter.toString());
 		logger.info("开始根据名字查询数据...");
 		
 		User user;
@@ -135,7 +139,7 @@ public class UserRestController {
 		else {
 			response = new Response("", ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
-		logger.info(response.toString());
+		logger.info("response: "+response.toString());
 		return response;
 	}
 	
@@ -145,7 +149,7 @@ public class UserRestController {
 	@GetMapping("/user/findUserAll")
 	public Response<List<User>> findAll() {
 		logger.info("开始查询所有数据...");
-		
+
 		List<User> findAll;
 		//redis缓存中查询
 		findAll = redisU.get("User_findUserAll", List.class);
@@ -164,7 +168,7 @@ public class UserRestController {
 		else {
 			response = new Response(findAll, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
-		logger.info(response.toString());
+		logger.info("response: "+response.toString());
 		return response;
 	}
 	
@@ -174,6 +178,7 @@ public class UserRestController {
 	@ApiOperation(value="分页查询全部用户", notes="分页查询全部用户数据")
 	@PostMapping("/user/findUserAllByPage")
 	public Response<PageInfo> findAllByPage(@RequestBody RequestParameter<User> requestParameter) {
+		logger.info("request: "+ requestParameter.toString());
 		logger.info("开始分页查询数据...");
 		
 		PageHelper.startPage(requestParameter.getData().getPageinfo().getPageNum(), requestParameter.getData().getPageinfo().getPageSize());
@@ -187,10 +192,8 @@ public class UserRestController {
 		else {
 			response = new Response(pageinfo, ResponseCode.ERROR.code(), ResponseCode.ERROR.message());
 		}
-		logger.info(response.toString());
+		logger.info("response: "+response.toString());
 		return response;
 	}
-	
-	
-	
+
 }
